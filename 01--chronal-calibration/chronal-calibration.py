@@ -21,10 +21,12 @@ realFile = "input.txt"
 def totalFile(filename):
     try:
         with open(filename) as currentFile:
+            total = 0
             for line in currentFile:
                 if line != "\n":
                     num = int(line[:-1])
-                    print(num)
+                    total += num
+            return total
 
     except FileNotFoundError:
         print("\nError: File not found: ", filename)
@@ -32,9 +34,18 @@ def totalFile(filename):
 
 
 def main():
-    answer = totalFile(testFile1)
-    if answer:
-        print("The total is %i." %(answer))
+    t1Answer = totalFile(testFile1)
+    if t1Answer != None:
+        print("The total for test1 is %i." %(t1Answer))
+    t2Answer = totalFile(testFile2)
+    if t2Answer != None:
+        print("The total for test2 is %i." %(t2Answer))
+    t3Answer = totalFile(testFile3)
+    if t3Answer != None:
+        print("The total for test3 is %i." %(t3Answer))
+    realAnswer = totalFile(realFile)
+    if realAnswer != None:
+        print("The final total is %i." %(realAnswer))
 
 
 main()
