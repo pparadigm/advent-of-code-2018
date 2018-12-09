@@ -4,7 +4,6 @@
 
 
 # initialize variables
-total = 0
 testFile1 = "test1.txt"
 testFile2 = "test2.txt"
 testFile3 = "test3.txt"
@@ -21,18 +20,19 @@ realFile = "input.txt"
 
 def totalFile(filename):
     try:
-        currentFile = open(filename, 'r')
-        return 1
+        with open(filename) as currentFile:
+            for line in currentFile:
+                if line != "\n":
+                    num = int(line[:-1])
+                    print(num)
+
     except FileNotFoundError:
         print("\nError: File not found: ", filename)
         return None
 
 
-    currentFile.close()
-
-
 def main():
-    answer = totalFile(realFile)
+    answer = totalFile(testFile1)
     if answer:
         print("The total is %i." %(answer))
 
