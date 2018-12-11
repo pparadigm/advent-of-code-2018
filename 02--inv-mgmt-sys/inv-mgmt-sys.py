@@ -12,12 +12,38 @@ def idToDupesDict(id):
 			dupesDict[letter] = 1
 	return dupesDict
 
-def runTestID(id):
-	# converts the id to its dupes and displays the results
-	print("ID:\t%s\ncounts:\t" %(id), idToDupesDict(id))
-
+def dictToDupesCount(dupeDict):
+	# returns a tuple of doubleDupes, tripleDupes based on the dictionary counts
+	doubleNotFound = True
+	tripleNotFound = True
+	doubleDupes = 0
+	tripleDupes = 0
+	for k, v in dupeDict.items():
+		if v == 2 and doubleNotFound:
+			doubleDupes += 1
+			doubleNotFound = False
+		elif v == 3 and tripleNotFound:
+			tripleDupes += 1
+			tripleNotFound = False
+	return doubleDupes, tripleDupes
+	
 def main():
+	doubleLetterIDsTot = 0
+	tripleLetterIDsTot = 0
 	for label in testIDs:
-		runTestID(label)
+		# convert the id to its counts
+		dupeLettersDict = idToDupesDict(label)
+		# get the numbers of doubles and triples
+		twos, threes = dictToDupesCount(dupeLettersDict)
+		# add them to the total counts
+		doubleLetterIDsTot += twos
+		tripleLetterIDsTot += threes
+	# calculate "checksum"
+	checksum = doubleLetterIDsTot * tripleLetterIDsTot
+	# display results
+	print("# of double-letter IDs: %i\n"
+		  "# of triple-letter IDs: %i\n"
+		  "Checksum: %i" %(doubleLetterIDsTot, tripleLetterIDsTot, checksum))
+	
 	
 main()
