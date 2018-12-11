@@ -54,8 +54,6 @@ def findFraternalTwinIDs(idList):
 			if matchesFound: break
 			comparee = idList[secondID]
 			differenceFound = False
-			print(secondID, comparer)
-			print(secondID, comparee, "\n")
 			for char in range(idLen):
 				# if this is the first difference, note it and keep looking
 				if ((comparer[char] != comparee[char]) and 
@@ -70,7 +68,7 @@ def findFraternalTwinIDs(idList):
 				# if this is the last character and only one difference has been
 				#	found, return both IDs
 				elif ((comparer[char] == comparee[char]) and 
-					  (char == idLen)):
+					  (char == idLen - 1)):
 					firstIDMatch = comparer
 					secondIDMatch = comparee
 					matchesFound = True
@@ -88,7 +86,7 @@ def main():
 	
 	listFromFile = genListFromFile(realFile)
 	
-	for label in testIDs: #listFromFile:
+	for label in listFromFile:
 		# convert the id to its counts
 		dupeLettersDict = idToDupesDict(label)
 		# get the numbers of doubles and triples
@@ -103,10 +101,10 @@ def main():
 		  "# of triple-letter IDs: %i\n"
 		  "Checksum: %i" %(doubleLetterIDsTot, tripleLetterIDsTot, checksum))
 	
-	matchID1, matchID2 = findFraternalTwinIDs(testIDs)
+	matchID1, matchID2 = findFraternalTwinIDs(listFromFile)
 	print("\nMatch ID #1: %s\n"
 		  "Match ID #2: %s" 
 		  %(matchID1, matchID2))
-	
+
 	
 main()
