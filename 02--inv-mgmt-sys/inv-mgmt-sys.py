@@ -79,6 +79,24 @@ def findFraternalTwinIDs(idList):
 				# else if the characters are the same and not the last, go onto
 				#	the next character
 	return firstIDMatch, secondIDMatch
+
+def getCommonSequence(a, b):
+	# takes two strings of the same length that differ by a letter and 
+	#	returns the letters in common
+	common = ""
+	lenA = len(a)
+	for char in range(len(a)):
+		# if two chars are same, add them to the common string
+		if a[char] == b[char]:
+			common += a[char]
+		else:
+			# if two chars are different and we're not at the last one, add all
+			#	of the chars after this one to the common string and end the
+			#	comparisons
+			if not (char == (lenA-1)):
+				common += a[char+1:lenA]
+			break
+	return common
 	
 def main():
 	doubleLetterIDsTot = 0
@@ -105,6 +123,9 @@ def main():
 	print("\nMatch ID #1: %s\n"
 		  "Match ID #2: %s" 
 		  %(matchID1, matchID2))
+	
+	inCommon = getCommonSequence(matchID1, matchID2)
+	print("Common ID sequence is: %s" %(inCommon))
 
 	
 main()
