@@ -1,4 +1,5 @@
 testIDs = ["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"]
+realFile = "input.txt"
 
 def idToDupesDict(id):
 	# takes a string of characters
@@ -26,11 +27,22 @@ def dictToDupesCount(dupeDict):
 			tripleDupes += 1
 			tripleNotFound = False
 	return doubleDupes, tripleDupes
+
+def genListFromFile(filename):
+	# returns a list of the strings from the lines of the file
+	results = []
+	with open(filename) as inputFile:
+		for line in inputFile:
+			results.append(line.strip())
+	return results
 	
 def main():
 	doubleLetterIDsTot = 0
 	tripleLetterIDsTot = 0
-	for label in testIDs:
+	
+	listFromFile = genListFromFile(realFile)
+	
+	for label in listFromFile:
 		# convert the id to its counts
 		dupeLettersDict = idToDupesDict(label)
 		# get the numbers of doubles and triples
